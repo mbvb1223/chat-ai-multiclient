@@ -9,12 +9,23 @@
     "gemini-api-php/client": "^1.7"
   },
   "require-dev": {
-    "phpunit/phpunit": "^12.0"
+    "phpunit/phpunit": "^12.0",
+    "friendsofphp/php-cs-fixer": "^3.70"
   },
   "autoload": {
     "psr-4": {
       "Mbvb1223\\ChatAiMulticlient\\": "src/"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Mbvb1223\\ChatAiMulticlient\\Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "fix": "vendor/bin/php-cs-fixer fix . -vvv",
+    "check": "vendor/bin/php-cs-fixer check . -vvv",
+    "test": "vendor/bin/phpunit --testdox"
   },
   "license": "MIT",
   "authors": [

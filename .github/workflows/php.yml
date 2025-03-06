@@ -1,0 +1,78 @@
+name: PHP Composer and PHPUnit
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build_test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Validate composer.json and composer.lock
+      run: composer validate --strict
+
+    - name: Cache Composer packages
+      id: composer-cache
+      uses: actions/cache@v3
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php-
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress
+
+    - name: Enable Xdebug
+      run: echo "XDEBUG_MODE=coverage" >> $GITHUB_ENV
+
+    - name: Run CS checks
+      run: composer run-script check
+
+    - name: Run test suite
+      run: composer run-script test
+
+    - name: Run test suite with coverage
+      run: vendor/bin/phpunit --coverage-html ./tests/Reports
+
+    - name: Upload coverage report
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-report
+        path: ./tests/Reports
+        retention-days: 2
+
+  upload-coverage-report:
+    needs: build_test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download coverage report artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-report
+          path: ./tests/Reports
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./tests/Reports
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  install:
+    needs: build_test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install the package
+        run: composer require mbvb1223/chat-ai-multiclient --no-cache --prefer-dist --no-progress
