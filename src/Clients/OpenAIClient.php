@@ -21,10 +21,7 @@ class OpenAIClient extends BaseClient
     {
         $response = $this->client->chat()->create([
             'model' => $this->getModel(),
-            'messages' => [
-                ['role' => 'system', 'content' => 'You are a helpful assistant.'],
-                ['role' => 'user', 'content' => 'Hello, ChatGPT!'],
-            ],
+            'messages' => [['role' => 'user', 'content' => $prompt]],
         ]);
 
         return $response->choices[0]->message->content;
