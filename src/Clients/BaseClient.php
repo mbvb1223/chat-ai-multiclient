@@ -4,17 +4,20 @@ declare(strict_types=1);
 
 namespace Mbvb1223\ChatAiMulticlient\Clients;
 
-use GeminiAPI\Client;
-
 abstract class BaseClient
 {
-    protected Client $client;
     protected string $model;
+    protected string $apiKey;
 
     public function __construct(string $apiKey)
     {
-        $this->client = new Client($apiKey);
+        $this->apiKey = $apiKey;
+        $this->setClient($apiKey);
     }
+
+    abstract public function setClient(string $apiKey): void;
+
+    abstract public function chat(string $prompt, array $options = []): string;
 
     public function setModel(string $model): void
     {
@@ -25,6 +28,4 @@ abstract class BaseClient
     {
         return $this->model;
     }
-
-    abstract public function chat(string $prompt, array $options = []): string;
 }

@@ -8,6 +8,11 @@ use GuzzleHttp\Client;
 
 class GrokClient extends BaseClient
 {
+    public function setClient(string $apiKey): void
+    {
+        // TODO: Implement setClient() method.
+    }
+
     public function chat(string $prompt, array $options = []): string
     {
         return 'grok is chatting';
