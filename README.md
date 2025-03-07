@@ -53,7 +53,7 @@ Contributions are welcome! Feel free to submit issues and pull requests.
 
 This project is licensed under the MIT License.
 
-## Packagaist
+## Packagist
 
 <a href="https://packagist.org/packages/mbvb1223/chat-ai-multiclient" target="_blank" rel="noopener noreferrer">https://packagist.org/packages/mbvb1223/chat-ai-multiclient</a>
 
