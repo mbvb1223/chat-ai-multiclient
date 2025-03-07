@@ -18,11 +18,11 @@ class GeminiClient extends BaseClient
         $this->client = new Client($apiKey);
     }
 
-    public function chat(string $prompt, array $options = []): string
+    public function chat(string $text, array $options = []): string
     {
         $response = $this->client
             ->generativeModel($this->getModel())
-            ->generateContent(new TextPart($prompt));
+            ->generateContent(new TextPart($text));
 
         return $response->text();
     }

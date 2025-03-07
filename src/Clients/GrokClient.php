@@ -13,7 +13,7 @@ class GrokClient extends BaseClient
         // TODO: Implement setClient() method.
     }
 
-    public function chat(string $prompt, array $options = []): string
+    public function chat(string $text, array $options = []): string
     {
         return 'grok is chatting';
     }

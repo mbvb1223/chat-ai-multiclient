@@ -17,11 +17,11 @@ class OpenAIClient extends BaseClient
         $this->client = OpenAI::client($apiKey);
     }
 
-    public function chat(string $prompt, array $options = []): string
+    public function chat(string $text, array $options = []): string
     {
         $response = $this->client->chat()->create([
             'model' => $this->getModel(),
-            'messages' => [['role' => 'user', 'content' => $prompt]],
+            'messages' => [['role' => 'user', 'content' => $text]],
         ]);
 
         return $response->choices[0]->message->content;
