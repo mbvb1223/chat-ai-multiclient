@@ -3,7 +3,7 @@
 A PHP package to interact with multiple chat-based AI APIs, including OpenAI, Gemini, and Grok. This library provides a unified interface to generate text responses from these services, with configurable models and extensible design.
 
 ## Features
-- Supports OpenAI, Gemini (placeholder), and Grok (placeholder) APIs.
+- Supports OpenAI, Gemini, and Grok (placeholder) APIs.
 - Configurable AI models for each service.
 - Simple factory pattern for easy client instantiation.
 - Built with Guzzle HTTP client for reliable API communication.
