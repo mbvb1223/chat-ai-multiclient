@@ -17,7 +17,7 @@ abstract class BaseClient
 
     abstract public function setClient(string $apiKey): void;
 
-    abstract public function chat(string $text, array $options = []): string;
+    abstract public function chat(string $text, string $model = null, array $options = []): string;
 
     public function setModel(string $model): void
     {

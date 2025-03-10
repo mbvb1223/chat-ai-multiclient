@@ -15,8 +15,8 @@ class ChatAiService
         $this->client = $client;
     }
 
-    public function chat(string $prompt, array $options = []): string
+    public function chat(string $prompt, string $model = null, array $options = []): string
     {
-        return $this->client->chat($prompt, $options);
+        return $this->client->chat($prompt, $model, $options);
     }
 }
